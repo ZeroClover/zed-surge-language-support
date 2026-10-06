@@ -1,0 +1,16 @@
+name = "Surge Configuration"
+grammar = "surge"
+path_suffixes = ["sgconf", "dconf", "Surge.conf"]
+# Managed profiles start with this line; other profiles need file_types or a modeline.
+first_line_pattern = '^\x{FEFF}?[\t ]*#!MANAGED-CONFIG[\t ]'
+# Same IDs as VS Code, e.g. "# vim: set ft=surge:"
+modeline_aliases = ["surge"]
+line_comments = ["# ", "; ", "// "]
+tab_size = 2
+word_characters = ["-"]
+brackets = [
+  { start = "[", end = "]", close = true, newline = false },
+  { start = "(", end = ")", close = false, newline = false },
+  { start = "{", end = "}", close = false, newline = false },
+  { start = "\"", end = "\"", close = true, newline = false, not_in = ["string", "comment"] },
+]

@@ -1,0 +1,6 @@
+DOMAIN,example.com
+# RULE-SET syntax; DOMAIN-SET domain lists are a different format.
+DOMAIN-SUFFIX,example.org
+IP-CIDR,192.0.2.0/24,no-resolve
+AND,((DOMAIN-KEYWORD,ads),(DEST-PORT,443))
+URL-REGEX,"^https://example.com/a,b#fragment"

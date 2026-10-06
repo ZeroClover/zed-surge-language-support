@@ -1,0 +1,13 @@
+{
+  "name": "zed-surge-development",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "generate": "cd tree-sitter-surge && tree-sitter generate --abi 14",
+    "test": "node scripts/test-grammar.mjs",
+    "prepare:extension": "node scripts/prepare.mjs"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "0.25.10"
+  }
+}

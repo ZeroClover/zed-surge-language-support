@@ -1,0 +1,7 @@
+/target/
+/node_modules/
+/.build/
+/grammars/
+/extension.wasm
+/tree-sitter-surge/*.dylib
+/tree-sitter-surge/*.so

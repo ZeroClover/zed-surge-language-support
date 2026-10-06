@@ -1,0 +1,14 @@
+name = "Surge Module"
+grammar = "surge"
+path_suffixes = ["sgmodule"]
+first_line_pattern = '^\x{FEFF}?[\t ]*#!name[\t ]*='
+modeline_aliases = ["surge-module"]
+line_comments = ["# ", "; ", "// "]
+tab_size = 2
+word_characters = ["-"]
+brackets = [
+  { start = "[", end = "]", close = true, newline = false },
+  { start = "(", end = ")", close = false, newline = false },
+  { start = "{", end = "}", close = false, newline = false },
+  { start = "\"", end = "\"", close = true, newline = false, not_in = ["string", "comment"] },
+]

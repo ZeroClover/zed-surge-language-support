@@ -1,0 +1,15 @@
+#!name=Example Module
+#!desc=Editor syntax fixture
+#!arguments=hostname:example.com
+
+[General]
+skip-proxy = %APPEND% {{{hostname}}}
+
+[Rule]
+DOMAIN,{{{hostname}}},DIRECT
+
+[Header Rewrite]
+http-response ^https://example.com/ header-del Server
+
+[Body Rewrite]
+http-response-jq ^https://example.com/ '.enabled = true'

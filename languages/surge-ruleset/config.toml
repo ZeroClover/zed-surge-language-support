@@ -1,0 +1,15 @@
+name = "Surge Rule Set"
+grammar = "surge"
+# Surge defines no rule set extension and ".list" is shared with other formats.
+# "sgruleset" follows sgconf/sgmodule; Zed also takes the language's picker icon from path_suffixes.
+path_suffixes = ["sgruleset"]
+first_line_pattern = '^\x{FEFF}?[\t ]*(DOMAIN|DOMAIN-SUFFIX|DOMAIN-KEYWORD|DOMAIN-WILDCARD|IP-CIDR|IP-CIDR6|IP-ASN|GEOIP|SRC-IP|DEST-PORT|SRC-PORT|IN-PORT|PROCESS-NAME|PROTOCOL|USER-AGENT|URL-REGEX|SUBNET|DEVICE-NAME|MAC-ADDRESS|HOSTNAME-TYPE|CELLULAR-CARRIER|CELLULAR-RADIO|AND|OR|NOT)[\t ]*,'
+modeline_aliases = ["surge-ruleset"]
+line_comments = ["# ", "; ", "// "]
+tab_size = 2
+word_characters = ["-"]
+brackets = [
+  { start = "(", end = ")", close = false, newline = false },
+  { start = "{", end = "}", close = false, newline = false },
+  { start = "\"", end = "\"", close = true, newline = false, not_in = ["string", "comment"] },
+]
