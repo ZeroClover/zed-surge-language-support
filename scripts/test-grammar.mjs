@@ -159,6 +159,10 @@ try {
   const redacted = [...run('query', '--captures', path.join(root, 'languages/surge/redactions.scm'), secrets)
     .matchAll(/capture: \d+ - redact, .*text: `([^`]*)`/g)].map(match => match[1]);
   assert.deepEqual(redacted, ['key@127.0.0.1:6166', '"p,w"', '1234']);
+  // Zed fetches the grammar at the pinned rev, so committed grammar changes must move it.
+  const rev = /\[grammars\.surge\][^[]*?rev = "([0-9a-f]+)"/.exec(readFileSync(path.join(root, 'extension.toml'), 'utf8'))[1];
+  const grammarCommit = execFileSync('git', ['-C', root, 'log', '-1', '--format=%H', '--', 'tree-sitter-surge'], { encoding: 'utf8' }).trim();
+  assert.equal(rev, grammarCommit, 'Set rev in extension.toml to the latest commit that changed tree-sitter-surge/');
   console.log(`PASS: ${cases.length} syntax and highlight cases, ${fixtures.length} examples, 15 Zed queries.`);
 } finally {
   rmSync(temp, { recursive: true, force: true });

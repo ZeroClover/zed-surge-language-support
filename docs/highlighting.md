@@ -1,6 +1,6 @@
 # Highlighting and queries
 
-The query files live in `languages/surge/`. `npm run prepare:extension` copies them to `surge-module` and `surge-ruleset`:
+The query files live in `languages/surge/`. `npm run sync-queries` copies them to `surge-module` and `surge-ruleset`:
 
 | File | Purpose |
 | --- | --- |
@@ -45,4 +45,4 @@ Rule options are recognized by position rather than from a word list: every colu
 
 ## After changing queries
 
-Add color assertions to the cases in `scripts/test-grammar.mjs`, written as `[line, snippet, expected capture, occurrence]`; they check the final color of the snippet's first character. Redaction captures are asserted separately near the end of the same script. Then run `npm run prepare:extension` and `npm test`.
+Add color assertions to the cases in `scripts/test-grammar.mjs`, written as `[line, snippet, expected capture, occurrence]`; they check the final color of the snippet's first character. Redaction captures are asserted separately near the end of the same script. Then run `npm run sync-queries` and `npm test`.

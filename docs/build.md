@@ -7,25 +7,20 @@
 
 The extension API is pinned to `zed_extension_api = "=0.7.0"` in `Cargo.toml`.
 
-## Grammar snapshot
+## Grammar source
 
-`[grammars.surge]` in `extension.toml` points to a `file://` URL for `.build/grammar-repository` and a specific commit. Zed requires the grammar to come from a pinned commit of a git repository, and this project has no public remote yet, so `npm run prepare:extension` (`scripts/prepare.mjs`):
+Zed loads a grammar from a pinned commit of a git repository. `[grammars.surge]` in `extension.toml` points at this repository on GitHub, with `path = "tree-sitter-surge"` and `rev` set to the latest commit that changed `tree-sitter-surge/`. Zed fetches that commit even for a dev install, so the grammar it compiles is the pushed one, not your working copy. `npm test` fails when a committed grammar change isn't reflected in `rev`.
 
-1. Copies the queries from `languages/surge/` to the other two languages.
-2. Copies `grammar.js`, `tree-sitter.json`, and `src/` from `tree-sitter-surge/` into `.build/grammar-repository` and commits them.
-3. Rewrites `repository` and `rev` in `extension.toml` to point at that snapshot.
+To ship a grammar change:
 
-Run it again after moving the project folder or changing the grammar. Before publishing to the Zed extension registry, `repository` has to become a public repository URL with the matching commit.
+1. Commit the change under `tree-sitter-surge/` and push it.
+2. Set `rev` to that commit's full hash, then commit and push `extension.toml`.
+
+To try an unpushed grammar change in Zed, temporarily set `repository` to this checkout's `file://` URL (for example `file:///Volumes/Git/zed-surge-language-support`) and `rev` to a local commit, then rebuild the dev extension. Restore the GitHub URL before committing.
 
 ## Dev install
 
-```sh
-npm ci
-npm run generate
-npm run prepare:extension
-```
-
-Then run `zed: install dev extension` in Zed and pick the project root. Zed compiles the Rust code and the grammar itself, downloading wasi-sdk for the grammar unless `WASI_SDK_PATH` points to an existing one. Its build output (`extension.wasm`, `grammars/`) lands in the project root and is gitignored. The Zed extension registry builds published versions the same way from the submitted commit, so there's no separate packaging step.
+Run `zed: install dev extension` in Zed and pick the project root; it needs only Rust, not the npm toolchain. Zed compiles the Rust code and the grammar itself, downloading wasi-sdk for the grammar unless `WASI_SDK_PATH` points to an existing one. Its build output (`extension.wasm`, `grammars/`) lands in the project root and is gitignored. The Zed extension registry builds published versions the same way from the submitted commit, so there's no separate packaging step. After changing the extension, use the Rebuild button on the extension's card in Zed's Extensions page.
 
 ## Verification
 

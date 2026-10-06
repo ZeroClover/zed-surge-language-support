@@ -5,7 +5,7 @@
   "scripts": {
     "generate": "cd tree-sitter-surge && tree-sitter generate --abi 14",
     "test": "node scripts/test-grammar.mjs",
-    "prepare:extension": "node scripts/prepare.mjs"
+    "sync-queries": "node scripts/sync-queries.mjs"
   },
   "devDependencies": {
     "tree-sitter-cli": "0.25.10"

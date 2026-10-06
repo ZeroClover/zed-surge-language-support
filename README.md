@@ -14,15 +14,7 @@ Diagnostics need a Surge for Mac build with LSP support. The official VS Code ex
 
 ## Installation
 
-The extension isn't in Zed's extension registry yet. To install it from this repository, you need Node.js and Rust installed through [rustup](https://rustup.rs):
-
-```sh
-npm ci
-npm run generate
-npm run prepare:extension
-```
-
-Then run `zed: install dev extension` from Zed's command palette and pick this folder. Zed compiles the extension and the grammar itself.
+The extension isn't in Zed's extension registry yet. To install it from a clone of this repository, you need Rust installed through [rustup](https://rustup.rs). Run `zed: install dev extension` from Zed's command palette and pick the cloned folder; Zed compiles the extension and the grammar itself.
 
 To see it in action, open `Surge.conf`, `example.sgmodule`, or `example.list` from `examples/`.
 
@@ -121,7 +113,7 @@ Setting `private_files` replaces Zed's default list, so the example keeps the de
 See [AGENTS.md](AGENTS.md) and the `docs/` folder. Common commands:
 
 ```sh
-npm ci && npm run generate && npm run prepare:extension
+npm ci && npm run generate
 npm test
 cargo test
 node scripts/test-lsp.mjs

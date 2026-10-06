@@ -2,7 +2,8 @@ id = "surge"
 name = "Surge"
 version = "0.1.0"
 schema_version = 1
-authors = ["Surge Zed contributors"]
+authors = ["Zero Clover <zero@root.me>"]
+repository = "https://github.com/ZeroClover/zed-surge-language-support"
 description = "Surge configurations, modules, and rule sets, with native Surge CLI diagnostics."
 # Zed's Node.js runs server/surge-lsp.mjs to check the configured surge-cli.
 capabilities = [{ kind = "process:exec", command = "*", args = ["*", "check", "*"] }]
@@ -16,7 +17,8 @@ languages = ["Surge Configuration", "Surge Module", "Surge Rule Set"]
 "Surge Module" = "surge-module"
 "Surge Rule Set" = "surge-ruleset"
 
-# scripts/prepare.mjs writes a local file:// repository and exact commit here.
+# The grammar lives in this repository; rev is the latest commit that changed tree-sitter-surge/.
 [grammars.surge]
-repository = "file:///Volumes/Git/zed-surge-language-support/.build/grammar-repository"
-rev = "41ac80149150f1639212ac488d758acef017caf9"
+repository = "https://github.com/ZeroClover/zed-surge-language-support"
+rev = "63e3b59e0c15f3772a0ed99e685d8ba95aae1379"
+path = "tree-sitter-surge"

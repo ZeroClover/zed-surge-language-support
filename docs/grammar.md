@@ -63,7 +63,7 @@ Condition values inside the parentheses of logical rules use `value` and can't c
 ## After changing the grammar
 
 1. Run `npm run generate` to regenerate `src/parser.c`. A conflict during generation usually means some line rule can still accept `[` or another symbol at the end of a line. Prefer narrowing a token or having the scanner supply context over adding `conflicts`.
-2. Run `npm run prepare:extension` to refresh the local grammar snapshot and point `rev` in `extension.toml` at it.
-3. Run `npm test`. When adding a section type or fixing a parse problem, add a case to `cases` in `scripts/test-grammar.mjs` that asserts both the nodes and the final colors.
+2. Run `npm test`. When adding a section type or fixing a parse problem, add a case to `cases` in `scripts/test-grammar.mjs` that asserts both the nodes and the final colors.
+3. Commit and push, then move `rev` in `extension.toml` to that commit, as described in [build.md](build.md#grammar-source).
 
 Zed reparses half-typed input on every keystroke: a lone `[`, an unfinished header, an unclosed quote. After changing the scanner, try these inputs to confirm that parsing still returns and that errors stay on the current line.
